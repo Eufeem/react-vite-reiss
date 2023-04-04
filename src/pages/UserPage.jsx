@@ -44,6 +44,7 @@ export const UserPage = () => {
 
   return (
     <>
+    <div className="container mt-4">
       <div className="row justify-content-center">
         <div className="col-12 col-xs-12 col-md-10 col-lg-10">
           <div className="card">
@@ -127,6 +128,7 @@ export const UserPage = () => {
           </div>
         </div>
       </div>
+    </div>
     </>
   )
 }

@@ -39,7 +39,7 @@ export const NavbarComponent = () => {
     <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
       <Container>
         <img src="./src/assets/react.svg" alt="Bootstrap" width="30" height="24" />
-        <Navbar.Brand href="#home">Reiss</Navbar.Brand>
+        <Navbar.Brand href="#home" className='color-primary fw-bold'>Reiss</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

@@ -6,9 +6,7 @@ export const LayoutComponent = () => {
   return (
     <>
       <NavbarComponent />
-      <div className="container mt-4">
-        <Outlet />
-      </div> 
+      <Outlet />
     </>
   )
 }
