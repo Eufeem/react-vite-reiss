@@ -12,6 +12,7 @@ import { HomePage } from './pages/HomePage';
 import { UserPage } from './pages/UserPage';
 import { ProductPage } from './pages/ProductPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { TablePage } from './pages/TablePage';
 
 export const App = () => {
 
@@ -23,6 +24,7 @@ export const App = () => {
           <Route path='/Home' element={<HomePage />}/>
           <Route path='/User' element={<UserPage />}/>
           <Route path='/Product' element={<ProductPage />}/>
+          <Route path='/Table' element={<TablePage />}/>
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>

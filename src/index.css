@@ -1,5 +1,4 @@
 html, body {
-  /* background: #f8f9fb; */
   background-color: #f3f3f4 !important;
   width: 100%;
 }
@@ -41,11 +40,29 @@ html, body {
 }
 
 .color-secondary {
-  color: #0bbbf9;
+  color: #ff5c35;
 }
 
 .color-third {
-  color: #fff;
+  color: #4caf50;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: #4caf50 !important;  
+  border-color: #4caf50 !important;
+}
+.btn-success:hover {
+  background-color: #3a993e !important;  
+  border-color: #3a993e !important;
+}
+
+/* Bg */
+.bg-danger {
+  background-color: #f44336 !important;
+}
+.bg-success {
+  background-color: #4caf50 !important;
 }
 
 /* Home Page */

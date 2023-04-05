@@ -56,7 +56,7 @@ export const UserPage = () => {
 
                   <div className="col-12 col-xs-12 col-md-3 mb-2">
                     <label className='form-label'>Nombre</label>
-                    <input type="text" 
+                    <input type="text" autoComplete="off"
                       className={"form-control " + (errors.name ? 'is-invalid' : '')}
                       {...register('name', {required: true, maxLength: 20} )} />
                       { errors.name && <span className='text-danger'>Nombre es requerido</span> }
@@ -64,7 +64,7 @@ export const UserPage = () => {
 
                   <div className="col-12 col-xs-12 col-md-3 mb-2">
                     <label className='form-label'>Apellido</label>
-                    <input type="text" 
+                    <input type="text" autoComplete="off"
                       className={"form-control " + (errors.lastName ? 'is-invalid' : '')}
                       {...register('lastName', {required: true, maxLength: 30} )} />
                       { errors.lastName && <span className='text-danger'>Apellido es requerido</span> }
@@ -72,7 +72,7 @@ export const UserPage = () => {
 
                   <div className="col-12 col-xs-12 col-md-3 mb-2">
                     <label className='form-label'>Username</label>
-                    <input type="text" 
+                    <input type="text" autoComplete="off"
                       className={"form-control " + (errors.username ? 'is-invalid' : '')}
                       {...register('username', {required: true, maxLength: 30} )} />
                       { errors.username && <span className='text-danger'>Nombre usuario es requerido</span> }
@@ -80,7 +80,7 @@ export const UserPage = () => {
 
                   <div className="col-12 col-xs-12 col-md-3 mb-2">
                     <label className='form-label'>Contraseña</label>
-                    <input type="text" 
+                    <input type="text" autoComplete="off"
                       className={"form-control " + (errors.password ? 'is-invalid' : '')}
                       {...register('password', {required: true, maxLength: 30} )} />
                       { errors.password && <span className='text-danger'>Contraseña es requerido</span> }
@@ -88,7 +88,7 @@ export const UserPage = () => {
                   
                   <div className="col-12 col-xs-12 col-md-3 mb-2">
                     <label className='form-label'>Email</label>
-                    <input type="text" 
+                    <input type="text" autoComplete="off"
                       className={"form-control " + (errors.email ? 'is-invalid' : '')}
                       {...register('email', {required: true, maxLength: 30} )} />
                       { errors.email && <span className='text-danger'>Email es requerido</span> }

@@ -48,6 +48,7 @@ export const NavbarComponent = () => {
             <NavLink className="nav-link" to="/Home">Home</NavLink>
             <NavLink className="nav-link" to="/User">Users</NavLink>
             <NavLink className="nav-link" to="/Product">Products</NavLink>
+            <NavLink className="nav-link" to="/Table">DataTable</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

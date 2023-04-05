@@ -8,6 +8,7 @@ Personal development project with examples using the React library with the Vite
 + Redux           - npm install react-redux
 + React Hook Form -  npm install react-hook-form
 + Axios           - npm install axios
++ DataTable       - npm install react-data-table-component
 
 # Run Options
 + Local - npm run dev
