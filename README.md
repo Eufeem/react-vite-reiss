@@ -9,6 +9,7 @@ Personal development project with examples using the React library with the Vite
 + React Hook Form -  npm install react-hook-form
 + Axios           - npm install axios
 + DataTable       - npm install react-data-table-component
++ Notifications   - npm install --save react-toastify
 
 # Run Options
 + Local - npm run dev

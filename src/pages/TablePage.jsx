@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { DataTableComponent } from '../components/DataTableComponent';
 import { BadgeComponent } from '../components/BadgeComponent';
 import { UserFormComponent } from '../components/UserFormComponent';
+import { DataTableActions } from '../components/DataTableActions';
 
+const baseURL = 'http://localhost:8080/user'
 const columns = [
   {
     name: 'ID', selector: row => '#'+row.idUser ,sortable: true,
@@ -19,24 +21,28 @@ const columns = [
     name: 'Correo', selector: row => row.email, sortable: true,
   },{ 
     name: 'Estatus', selector: row => <BadgeComponent status={row.status} />, sortable: true,
-  },
+  }, {
+    name: 'Acciones', selector: row => <DataTableActions id={row.idUser} url={baseURL} />, sortable: false,
+  }
 ];
 
 export const TablePage = () => {
 
   const [userlist, setUserlist] = useState([])
-  const [count, setCount] = useState(0)
-  const baseURL = 'http://localhost:8080/user'
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    getAll()
-  }, [count])
+    getAll(null)
+  }, [])
 
-  const getAll = () => {
-    axios.get(baseURL).then((response) => {
-      setUserlist(response.data)
-    })
+  const getAll = (data) => {
+    if (data != null) {
+      setUserlist(data)
+    } else {
+      axios.get(baseURL).then((response) => {
+        setUserlist(response.data)
+      })
+    }
   } 
 
   const showFormFunction = () => {
@@ -66,7 +72,7 @@ export const TablePage = () => {
                   </div>
                 </div>
                 {
-                  showForm ? <UserFormComponent setCount={setCount} setShowForm={setShowForm}/> : 
+                  showForm ? <UserFormComponent setShowForm={setShowForm} reloadData={getAll}/> : 
                   <>
                     <h2>Tabla Usuarios</h2>
                     <DataTableComponent columns={columns} data={userlist} />

@@ -1,25 +1,34 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
+
+import { ToastContainer, toast } from 'react-toastify';
 
 export const UserFormComponent = (props) => {
   
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [count, setCount] = useState(0)
   const baseURL = 'http://localhost:8080/user'
 
   const onSubmit = (data) => {
     create(data)
   }
 
+  const sendNotification = () => {
+    toast.error("Wow so easy!");
+  }
+
   const create = (data) => {
     axios.post(baseURL, data).then((response) => {
-      props.setCount(count + 1)
-      setCount(count + 2)
-      setCount(count + 1)
-      props.setShowForm(false)
+      getAll()
     });
   }
+
+  const getAll = () => {
+    axios.get(baseURL).then((response) => {
+      props.reloadData(response.data)
+      props.setShowForm(false)
+    })
+  } 
 
   return (
     <>
@@ -86,6 +95,10 @@ export const UserFormComponent = (props) => {
             <button type="submit" className="btn btn-primary">
               <i className="bi bi-download"></i>&nbsp;Guardar
             </button>
+            <button type="button" className="btn btn-primary" onClick={sendNotification}>
+              <i className="bi bi-download"></i>&nbsp;aaaa
+            </button>
+            <ToastContainer />
           </div>
         </div>
       </form>
