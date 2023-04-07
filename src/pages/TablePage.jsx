@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import React, { useEffect, useState } from 'react'
 import { DataTableComponent } from '../components/DataTableComponent';
 import { BadgeComponent } from '../components/BadgeComponent';
@@ -20,9 +21,15 @@ const columns = [
   },{ 
     name: 'Correo', selector: row => row.email, sortable: true,
   },{ 
-    name: 'Estatus', selector: row => <BadgeComponent status={row.status} />, sortable: true,
+    name: 'Estatus', 
+    selector: row => <BadgeComponent status={row.status} />, 
+    sortable: true, 
+    center: true
   }, {
-    name: 'Acciones', selector: row => <DataTableActions id={row.idUser} url={baseURL} />, sortable: false,
+    name: 'Acciones', 
+    selector: row => <DataTableActions id={row.idUser} url={baseURL} />, 
+    sortable: false,
+    omit: true  
   }
 ];
 
@@ -30,23 +37,58 @@ export const TablePage = () => {
 
   const [userlist, setUserlist] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const [rowsSelect, setRowsSelect] = useState([])
 
   useEffect(() => {
     getAll(null)
   }, [])
 
   const getAll = (data) => {
-    if (data != null) {
-      setUserlist(data)
-    } else {
+    if (data == null) {
       axios.get(baseURL).then((response) => {
         setUserlist(response.data)
       })
     }
   } 
 
+  const showNotification = (flag, type) => {
+    if (flag) {
+      switch (type) {
+        case "create":
+          toast.success("Elemento guardado", {
+            theme: "colored"
+          })
+          break;
+        case "delete":
+          toast.error("Elemento eliminado", {
+            theme: "colored"
+          })
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  const getRows = (rows) => {
+    setRowsSelect(rows);
+  }
+
   const showFormFunction = () => {
     setShowForm(!showForm)
+  }
+
+  const deleteRows = () => {
+    if (rowsSelect.length > 0) {
+      rowsSelect.forEach(element => {
+        axios.delete(baseURL + "/" + element.idUser).then((response) => {
+          if (response.status == 204) {
+            getAll(null)
+            showNotification(true, "delete")
+          }
+        })
+      });
+    }
   }
 
   return (
@@ -65,17 +107,28 @@ export const TablePage = () => {
                       <button type="button" className="btn btn-danger" onClick={showFormFunction}>
                         <i className="bi bi-x-square"></i> Cerrar
                       </button> :
-                      <button type="button" className="btn btn-success" onClick={showFormFunction}>
-                        <i className="bi bi-plus-square"></i> Agregar Usuario
-                      </button>
+                      <>
+                        <button type="button" className="btn btn-success mx-2" onClick={showFormFunction}>
+                          <i className="bi bi-plus-square"></i> Agregar Usuario
+                        </button> 
+                        <button type="button" className="btn btn-danger" onClick={deleteRows}>
+                          <i className="bi bi-trash"></i> Eliminar
+                        </button>
+                      </>
                     }
                   </div>
                 </div>
                 {
-                  showForm ? <UserFormComponent setShowForm={setShowForm} reloadData={getAll}/> : 
+                  showForm ? <UserFormComponent 
+                                setShowForm={setShowForm} 
+                                reloadData={getAll}
+                                notification={showNotification} /> : 
                   <>
                     <h2>Tabla Usuarios</h2>
-                    <DataTableComponent columns={columns} data={userlist} />
+                    <DataTableComponent 
+                      columns={columns} 
+                      data={userlist} 
+                      rows={getRows} />
                   </>
                 }
               </div>
@@ -83,6 +136,8 @@ export const TablePage = () => {
           </div>
         </div>
       </div>
+
+      <ToastContainer />
     </>
   )
 }

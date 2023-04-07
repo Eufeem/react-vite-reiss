@@ -2,10 +2,8 @@ import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ToastContainer, toast } from 'react-toastify';
-
 export const UserFormComponent = (props) => {
-  
+
   const { register, handleSubmit, formState: { errors } } = useForm();
   const baseURL = 'http://localhost:8080/user'
 
@@ -13,22 +11,15 @@ export const UserFormComponent = (props) => {
     create(data)
   }
 
-  const sendNotification = () => {
-    toast.error("Wow so easy!");
-  }
-
   const create = (data) => {
     axios.post(baseURL, data).then((response) => {
-      getAll()
+      if (response.status == 201) {
+        props.reloadData(null)
+        props.setShowForm(false)
+        props.notification(true, "create")
+      }
     });
   }
-
-  const getAll = () => {
-    axios.get(baseURL).then((response) => {
-      props.reloadData(response.data)
-      props.setShowForm(false)
-    })
-  } 
 
   return (
     <>
@@ -38,7 +29,7 @@ export const UserFormComponent = (props) => {
 
           <div className="col-12 col-xs-12 col-md-3 mb-2">
             <label className='form-label'>Nombre</label>
-            <input type="text" autoComplete="off"
+            <input type="text" autoComplete="off" autoFocus
               className={"form-control " + (errors.name ? 'is-invalid' : '')}
               {...register('name', { required: true, maxLength: 20 })} />
             {errors.name && <span className='text-danger'>Nombre es requerido</span>}
@@ -95,10 +86,6 @@ export const UserFormComponent = (props) => {
             <button type="submit" className="btn btn-primary">
               <i className="bi bi-download"></i>&nbsp;Guardar
             </button>
-            <button type="button" className="btn btn-primary" onClick={sendNotification}>
-              <i className="bi bi-download"></i>&nbsp;aaaa
-            </button>
-            <ToastContainer />
           </div>
         </div>
       </form>
