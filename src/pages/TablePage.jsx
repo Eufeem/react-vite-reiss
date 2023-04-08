@@ -133,17 +133,24 @@ export const TablePage = () => {
                                 notification={showNotification} /> : 
                   <>
                     <div className="row justify-content-between">
+
                       <div className="col-12 col-sm-12 col-md-3 col-lg-3 mb-2">
                         <h2>Tabla Usuarios</h2>
                       </div>
                       <div className="col-12 col-sm-12 col-md-3 col-lg-3 mb-2">
-                        <input 
-                          type="text" 
-                          className="form-control" 
-                          placeholder="Busca por nombre"
-                          onChange={searchInput} />
+                        <div class="input-group">
+                          <span class="input-group-text" id="basic-addon1">
+                            <i class="bi bi-search"></i>
+                          </span>
+                          <input 
+                            type="text" 
+                            className="form-control" 
+                            placeholder="Busca por nombre"
+                            onChange={searchInput} />
+                        </div>
                       </div>
                     </div>
+                    
                     <DataTableComponent 
                       columns={columns} 
                       data={userlist} 

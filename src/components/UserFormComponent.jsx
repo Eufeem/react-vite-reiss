@@ -53,7 +53,7 @@ export const UserFormComponent = (props) => {
 
           <div className="col-12 col-xs-12 col-md-3 mb-2">
             <label className='form-label'>Contraseña</label>
-            <input type="text" autoComplete="off"
+            <input type="password" autoComplete="off"
               className={"form-control " + (errors.password ? 'is-invalid' : '')}
               {...register('password', { required: true, maxLength: 30 })} />
             {errors.password && <span className='text-danger'>Contraseña es requerido</span>}
@@ -61,7 +61,7 @@ export const UserFormComponent = (props) => {
 
           <div className="col-12 col-xs-12 col-md-3 mb-2">
             <label className='form-label'>Email</label>
-            <input type="text" autoComplete="off"
+            <input type="email" autoComplete="off"
               className={"form-control " + (errors.email ? 'is-invalid' : '')}
               {...register('email', { required: true, maxLength: 30 })} />
             {errors.email && <span className='text-danger'>Email es requerido</span>}

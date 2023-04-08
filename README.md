@@ -1,6 +1,7 @@
-## react-vite-reiss
+# react-vite-reiss 💻
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) [![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
+
 Personal development project with examples using the React library with the Vite framework.
 
 # Dependencies
