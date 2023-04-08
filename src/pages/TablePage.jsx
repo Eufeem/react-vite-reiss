@@ -82,6 +82,7 @@ export const TablePage = () => {
     if (rowsSelect.length > 0) {
       rowsSelect.forEach(element => {
         axios.delete(baseURL + "/" + element.idUser).then((response) => {
+          console.log(response)
           if (response.status == 204) {
             getAll(null)
             showNotification(true, "delete")
@@ -89,6 +90,12 @@ export const TablePage = () => {
         })
       });
     }
+  }
+
+  const searchInput = (event) => {
+    axios.post(baseURL + "/findByName", {name: event.target.value}).then( (response) => {
+      setUserlist(response.data)
+    })
   }
 
   return (
@@ -114,6 +121,7 @@ export const TablePage = () => {
                         <button type="button" className="btn btn-danger" onClick={deleteRows}>
                           <i className="bi bi-trash"></i> Eliminar
                         </button>
+
                       </>
                     }
                   </div>
@@ -124,7 +132,18 @@ export const TablePage = () => {
                                 reloadData={getAll}
                                 notification={showNotification} /> : 
                   <>
-                    <h2>Tabla Usuarios</h2>
+                    <div className="row justify-content-between">
+                      <div className="col-12 col-sm-12 col-md-3 col-lg-3 mb-2">
+                        <h2>Tabla Usuarios</h2>
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-3 col-lg-3 mb-2">
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          placeholder="Busca por nombre"
+                          onChange={searchInput} />
+                      </div>
+                    </div>
                     <DataTableComponent 
                       columns={columns} 
                       data={userlist} 
